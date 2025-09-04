@@ -81,7 +81,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded-xl px-2 py-1"
+                  className="w-full px-3 py-2 border border-slate-900 rounded-lg focus:outline-none focus:ring focus:ring-slate-800"
                 />
               </div>
               <div>
@@ -92,7 +92,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.price}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded-xl px-2 py-1"
+                  className="w-full px-3 py-2 border border-slate-900 rounded-lg focus:outline-none focus:ring focus:ring-slate-800"
                 />
               </div>
               <div>
@@ -103,7 +103,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.stock}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded-xl px-2 py-1"
+                  className="w-full px-3 py-2 border border-slate-900 rounded-lg focus:outline-none focus:ring focus:ring-slate-800"
                 />
               </div>
 
@@ -111,14 +111,14 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 border rounded hover:bg-slate-400"
+                  className="rounded-lg border py-1 px-6 bg-slate-100 text-black hover:bg-slate-200 transition"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-4 py-2 bg-slate-900 text-white rounded hover:bg-slate-950"
+                  className="rounded-lg py-1 px-6 bg-slate-800 text-white hover:bg-slate-900 transition"
                 >
                   {loading ? "Menyimpan..." : "Simpan"}
                 </button>
