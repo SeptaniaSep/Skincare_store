@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import axios from "axios";
 import { patchProduct } from "../../api/product";
 
 type Product = {
@@ -38,8 +37,8 @@ export const EditProductButton = ({ product, onUpdated }: Props) => {
     try {
       const token = localStorage.getItem("token") || "";
       const data = await patchProduct(product.id, formData, token);
-      onUpdated(data.product); // update state parent
-      setIsOpen(false); // tutup modal
+      onUpdated(data.product); 
+      setIsOpen(false); 
     } catch (err) {
       console.error(err);
       alert("Gagal update produk");

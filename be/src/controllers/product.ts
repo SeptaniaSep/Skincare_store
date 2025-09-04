@@ -59,7 +59,7 @@ export const deleteProduct: RequestHandler = async (req: Request, res: Response 
   const { id } = req.params;
 
   try {
-    // cek dulu apakah produk ada
+
     const product = await prisma.product.findUnique({
       where: { id: Number(id) },
     });
@@ -69,7 +69,7 @@ export const deleteProduct: RequestHandler = async (req: Request, res: Response 
       return 
     }
 
-    // hapus produk
+ 
     await prisma.product.delete({
       where: { id: Number(id) },
     });
@@ -88,7 +88,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
   const { name, price, stock } = req.body;
 
   try {
-    // cek dulu apakah produk ada
+  
     const product = await prisma.product.findUnique({
       where: { id: Number(id) },
     });
@@ -98,7 +98,6 @@ export const updateProduct: RequestHandler = async (req, res) => {
       return 
     }
 
-    // update produk
     const updated = await prisma.product.update({
       where: { id: Number(id) },
       data: {
@@ -132,7 +131,6 @@ export const patchProduct: RequestHandler = async (req, res) => {
       return res.status(404).json({ message: "Produk tidak ditemukan" });
     }
 
-    // Update hanya field yang dikirim
     const updated = await prisma.product.update({
       where: { id: Number(id) },
       data: {
