@@ -68,7 +68,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="bg-slate-200 p-6 rounded shadow-lg w-96"
+            className="bg-slate-200 p-6 rounded shadow-lg w-130"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-lg font-bold mb-4">Edit Produk</h2>
@@ -81,7 +81,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded px-2 py-1"
+                  className="w-full border rounded-xl px-2 py-1"
                 />
               </div>
               <div>
@@ -92,7 +92,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.price}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded px-2 py-1"
+                  className="w-full border rounded-xl px-2 py-1"
                 />
               </div>
               <div>
@@ -103,7 +103,7 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                   value={formData.stock}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded px-2 py-1"
+                  className="w-full border rounded-xl px-2 py-1"
                 />
               </div>
 
