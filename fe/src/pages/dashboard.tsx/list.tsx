@@ -1,6 +1,7 @@
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import EditProductButton from "./button_edit";
 import { deleteProduct } from "../../api/product";
-import { useState } from "react";
+
 
 type Product = {
   id: number;
@@ -12,28 +13,25 @@ type Product = {
 type Props = {
   products: Product[];
   loading: boolean;
-  onDelete: () => void;
+  onDelete: () => void; 
 };
 
 export default function ProductList({ products, loading, onDelete }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleDelete = async (id: number) => {
-    console.log("Klik delete id:", id);
-    if (!confirm("Yakin ingin menghapus produk ini?")) return;
+const handleDelete = async (id: number) => {
+  if (!confirm("Yakin ingin menghapus produk ini?")) return;
 
-    try {
-      const token = localStorage.getItem("token");
-      console.log("Token:", token);
-      if (!token) throw new Error("Token tidak ditemukan");
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("Token tidak ditemukan");
 
-      await deleteProduct(id, token);
-      console.log("Hapus sukses");
-      onDelete();
-    } catch (error) {
-      console.error("Gagal hapus produk:", error);
-    }
-  };
+    await deleteProduct(id, token);
+
+    onDelete();
+  } catch (error) {
+    console.error("Gagal hapus produk:", error);
+  }
+};
 
   if (loading) return <p className="px-10 py-6">Loading...</p>;
 
@@ -56,12 +54,10 @@ export default function ProductList({ products, loading, onDelete }: Props) {
             <span>Rp {Number(product.price).toLocaleString()}</span>
             <span>{product.stock}</span>
             <div className="flex gap-4">
-              <button
-                className="text-blue-600 hover:text-blue-800"
-                onClick={() => setIsOpen(true)}
-              >
-                <FaEdit />
-              </button>
+              <EditProductButton
+                product={product}
+                onUpdated={() => onDelete()}
+              />
               <button
                 className="text-red-600 hover:text-red-800"
                 onClick={() => handleDelete(product.id)}

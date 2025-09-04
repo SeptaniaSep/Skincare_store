@@ -4,7 +4,7 @@ import { createProduct } from "../../api/product";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onCreate: () => void; // ganti supaya modal bisa refresh list
+  onCreate: () => void; 
 };
 
 export default function CreateProductModal({ isOpen, onClose, onCreate }: Props) {

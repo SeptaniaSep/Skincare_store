@@ -17,7 +17,6 @@ export const createProduct = async (data: { name: string; price: string; stock: 
 };
 
 
-
 export const deleteProduct = async (id: number, token: string) => {
   return await apiProduct.delete(`/delete/${id}`, {
     headers: {
@@ -31,9 +30,7 @@ export const patchProduct = async (
   data: Partial<{ name: string; price: string; stock: number }>,
   token: string
 ) => {
-  return await apiProduct.patch(`/edit/${id}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+  return await apiProduct.patch(`/patch/${id}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
   });
 };

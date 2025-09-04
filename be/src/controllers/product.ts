@@ -83,69 +83,53 @@ export const deleteProduct: RequestHandler = async (req: Request, res: Response 
 
 
 // UPDATE product by ID
-export const updateProduct: RequestHandler = async (req, res) => {
-  const { id } = req.params;
-  const { name, price, stock } = req.body;
+// export const updateProduct: RequestHandler = async (req, res) => {
+//   const { id } = req.params;
+//   const { name, price, stock } = req.body;
 
-  try {
+//   try {
   
-    const product = await prisma.product.findUnique({
-      where: { id: Number(id) },
-    });
+//     const product = await prisma.product.findUnique({
+//       where: { id: Number(id) },
+//     });
 
-    if (!product) {
-      res.status(404).json({ message: "Produk tidak ditemukan" });
-      return 
-    }
+//     if (!product) {
+//       res.status(404).json({ message: "Produk tidak ditemukan" });
+//       return 
+//     }
 
-    const updated = await prisma.product.update({
-      where: { id: Number(id) },
-      data: {
-        name: name ?? product.name,
-        price: price ?? product.price,
-        stock: stock ?? product.stock,
-      },
-    });
+//     const updated = await prisma.product.update({
+//       where: { id: Number(id) },
+//       data: {
+//         name: name ?? product.name,
+//         price: price ?? product.price,
+//         stock: stock ?? product.stock,
+//       },
+//     });
 
-    res.status(200).json({
-      message: "Produk berhasil diperbarui",
-      product: updated,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Gagal mengedit produk" });
-  }
-};
+//     res.status(200).json({
+//       message: "Produk berhasil diperbarui",
+//       product: updated,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Gagal mengedit produk" });
+//   }
+// };
 
-// PATCH product by ID (update sebagian field)
-export const patchProduct: RequestHandler = async (req, res) => {
+// PATCH product by ID 
+export const patchProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, price, stock } = req.body;
 
   try {
-    const product = await prisma.product.findUnique({
+    const product = await prisma.product.update({
       where: { id: Number(id) },
+      data: { name, price: Number(price), stock: Number(stock) },
     });
-
-    if (!product) {
-      return res.status(404).json({ message: "Produk tidak ditemukan" });
-    }
-
-    const updated = await prisma.product.update({
-      where: { id: Number(id) },
-      data: {
-        ...(name && { name }),
-        ...(price && { price }),
-        ...(stock && { stock }),
-      },
-    });
-
-    res.status(200).json({
-      message: "Produk berhasil diperbarui (partial update)",
-      product: updated,
-    });
+    res.json({ product });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Gagal mengupdate produk" });
+    console.error(error); 
+    res.status(500).json({ error: "Gagal update produk" });
   }
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
 import { patchProduct } from "../../api/product";
+import { BiEdit } from "react-icons/bi";
 
 type Product = {
   id: number;
@@ -14,7 +14,7 @@ type Props = {
   onUpdated: (updated: Product) => void;
 };
 
-export const EditProductButton = ({ product, onUpdated }: Props) => {
+export default function EditProductButton({ product, onUpdated }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: product.name,
@@ -39,13 +39,11 @@ export const EditProductButton = ({ product, onUpdated }: Props) => {
 
       const payload = {
         name: formData.name,
-        price: formData.price.toString(),
+        price: formData.price.toString(), 
         stock: formData.stock,
       };
-
       const response = await patchProduct(product.id, payload, token);
-      const updatedProduct = response.data.product; 
-      onUpdated(updatedProduct);
+      onUpdated(response.data.product); 
       setIsOpen(false);
     } catch (err) {
       console.error(err);
@@ -61,7 +59,7 @@ export const EditProductButton = ({ product, onUpdated }: Props) => {
         className="text-blue-600 hover:text-blue-800"
         onClick={() => setIsOpen(true)}
       >
-        <FaEdit />
+      <BiEdit />
       </button>
 
       {isOpen && (
@@ -76,51 +74,51 @@ export const EditProductButton = ({ product, onUpdated }: Props) => {
             <h2 className="text-lg font-bold mb-4">Edit Produk</h2>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
-                <label className="block mb-1">Nama</label>
+                <label>Nama</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
                   required
+                  className="w-full border rounded px-2 py-1"
                 />
               </div>
               <div>
-                <label className="block mb-1">Harga</label>
+                <label>Harga</label>
                 <input
                   type="number"
                   name="price"
                   value={formData.price}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
                   required
+                  className="w-full border rounded px-2 py-1"
                 />
               </div>
               <div>
-                <label className="block mb-1">Stock</label>
+                <label>Stock</label>
                 <input
                   type="number"
                   name="stock"
                   value={formData.stock}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
                   required
+                  className="w-full border rounded px-2 py-1"
                 />
               </div>
 
               <div className="flex justify-end gap-2 mt-4">
                 <button
                   type="button"
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
                   onClick={() => setIsOpen(false)}
+                  className="px-4 py-2 border rounded hover:bg-gray-100"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                   disabled={loading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   {loading ? "Menyimpan..." : "Simpan"}
                 </button>
@@ -131,4 +129,4 @@ export const EditProductButton = ({ product, onUpdated }: Props) => {
       )}
     </>
   );
-};
+}
