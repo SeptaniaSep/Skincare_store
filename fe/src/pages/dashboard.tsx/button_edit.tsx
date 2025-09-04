@@ -59,16 +59,16 @@ export default function EditProductButton({ product, onUpdated }: Props) {
         className="text-blue-600 hover:text-blue-800"
         onClick={() => setIsOpen(true)}
       >
-      <BiEdit />
+      <BiEdit size={20} />
       </button>
 
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+          className="fixed inset-0  bg-black/50  bg-opacity-50 flex justify-center items-center z-50"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="bg-white p-6 rounded shadow-lg w-96"
+            className="bg-slate-200 p-6 rounded shadow-lg w-96"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-lg font-bold mb-4">Edit Produk</h2>
@@ -111,14 +111,14 @@ export default function EditProductButton({ product, onUpdated }: Props) {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
+                  className="px-4 py-2 border rounded hover:bg-slate-400"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="px-4 py-2 bg-slate-900 text-white rounded hover:bg-slate-950"
                 >
                   {loading ? "Menyimpan..." : "Simpan"}
                 </button>

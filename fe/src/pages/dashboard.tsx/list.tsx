@@ -62,7 +62,7 @@ const handleDelete = async (id: number) => {
                 className="text-red-600 hover:text-red-800"
                 onClick={() => handleDelete(product.id)}
               >
-                <FaTrash />
+                <FaTrash size={18}/>
               </button>
             </div>
           </div>
